@@ -1,0 +1,1 @@
+perl -E 'my ($opt, $choose, $sum) = @ARGV; my @opt=split/,/,$opt;my @mul=(); for(@opt){push @mul, $_};for(my $i=1; $i<$choose; $i++){my @m=();for my $b (@opt){for my $a (@mul){push @m, $a+$b;}}@mul=@m;}my %coeff=();for my $e (@mul){$coeff{$e}++}; print $coeff{$sum}."\n";' 1,2,3,5,8,13 3 14
