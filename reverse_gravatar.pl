@@ -47,6 +47,7 @@ com net org edu co.uk fr
 =head2 Example usage
 
 reverse_gravatar.pl daniel pastel lamblin fe101e680f0f36bb6082086bbd65444f
+reverse_gravatar.pl sampleInput.txt 2>/dev/null
 
 =cut
 
@@ -56,9 +57,12 @@ use Digest::MD5 qw/md5_hex/;
 
 my @g=qw//;
 my @n=qw//;
-my @s=qw/_ . : ; ,/;
+my @s=qw/_ . : ;/;
 my @d=qw/gmail hotmail yahoo mailinator aol verizon speakeasy/;
 my @t=qw/com net org edu co.uk fr/;
+
+# blank seperator and comma
+push @s, "", ",";
 
 sub parseArgOrLine {
   shift;
@@ -88,7 +92,7 @@ sub parseFiles (@) {
   }
 }
 
-if ($#files >= 0 || $#ARGV == 0) {
+if ($#files >= 0 || $#ARGV < 0) {
   parseFiles(@files);
 }
 
@@ -111,21 +115,24 @@ foreach (@n) {
 }
 @n = keys %c;
 
-# blank seperator
-push @s, "";
-
 foreach (@n, @s, @d, @t) {
   print "\"$_\"\n";
 }
 
 foreach my $fn (@n) {
+  if ("" eq $fn) {
+    next; # Always minimum 1 name.
+  }
   foreach my $mn (@n) {
     foreach my $ln (@n) {
+      if ("" eq $ln && "" ne $mn) {
+	next;
+      }
       foreach my $s (@s) {
 	foreach my $d (@d) {
 	  foreach my $t (@t) {
 	    my $e;
-	    if ($fn ne "" && $mn ne "") {
+	    if ($mn ne "") {
 	      $e = "$fn$s$mn";
 	    } else {
 	      $e = "$fn$mn";
