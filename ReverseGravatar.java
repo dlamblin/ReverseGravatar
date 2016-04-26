@@ -21,9 +21,9 @@ class ReverseGravatar {
 
   public static final HashSet<String> hashes = new HashSet<>();
   public static final HashSet<String> names = new HashSet<>();
-  public static final String[] seperators = {"_", ".", ":", ";", ""};
-  public static final String[] domains
-      = {"gmail", "hotmail", "yahoo", "mailinator", "aol", "verizon", "speakeasy"};
+  public static final String[] separators = {"_", ".", ":", ";", ""};
+  public static final String[] domains =
+      {"gmail", "hotmail", "yahoo", "mailinator", "aol", "verizon", "speakeasy"};
   public static final String[] tlds = {"com", "net", "org", "edu", "co.uk", "fr"};
 
   public static void main(String... args) throws NoSuchAlgorithmException, IOException {
@@ -43,7 +43,7 @@ class ReverseGravatar {
       }
     }
     int n = names.size();
-    int combinations = n * n * n * seperators.length * domains.length * tlds.length;
+    int combinations = n * n * n * separators.length * domains.length * tlds.length;
     return new ArrayList<>(combinations);
   }
 
@@ -62,17 +62,20 @@ class ReverseGravatar {
   }
 
   public static void generateEmails(ArrayList<String> emails) {
-    HashSet<String> namesOrEmpty = names;
-    HashSet<String> empty = new HashSet<>();
-    empty.add("");
+    HashSet<String> namesOrBlank;
+    HashSet<String> blankSet = new HashSet<>();
+    blankSet.add("");
+    String[] separatorsOrBlank;
+    String[] blank = {""};
     for (String fn: names) {
       if (fn.isEmpty()) {
         continue;
       }
       for (String mn: names) {
-        namesOrEmpty = mn.isEmpty() ? empty : names;
-        for (String ln: namesOrEmpty) {
-          for (String s : seperators) {
+        namesOrBlank = mn.isEmpty() ? blankSet : names;
+        separatorsOrBlank = mn.isEmpty() ? blank : separators;
+        for (String ln: namesOrBlank) {
+          for (String s : separatorsOrBlank) {
             for (String d : domains) {
               for (String t : tlds) {
                 StringBuilder email = new StringBuilder(fn);

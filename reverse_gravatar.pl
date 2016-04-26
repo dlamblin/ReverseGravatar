@@ -125,7 +125,7 @@ foreach my $fn (@n) {
   }
   foreach my $mn (@n) {
     foreach my $ln (("" eq $mn) ? "" : @n) {
-      foreach my $s (@s) {
+      foreach my $s (("" eq $mn) ? "" : @s) {
         foreach my $d (@d) {
           foreach my $t (@t) {
             my $e;
