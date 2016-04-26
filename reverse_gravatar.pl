@@ -27,7 +27,7 @@ program instead process standard in as it would a file (as just described).
 
 The program tries all combinations of name portions, the first character of
 name portions, from 1 to 3 parts with every and no separator, followed by @
-and every possible domain (from an internal list) with . and every possible 
+and every possible domain (from an internal list) with . and every possible
 domain ending (from an internal list).
 
 These lists are:
@@ -124,31 +124,28 @@ foreach my $fn (@n) {
     next; # Always minimum 1 name.
   }
   foreach my $mn (@n) {
-    foreach my $ln (@n) {
-      if ("" eq $ln && "" ne $mn) {
-	next;
-      }
+    foreach my $ln (("" eq $mn) ? "" : @n) {
       foreach my $s (@s) {
-	foreach my $d (@d) {
-	  foreach my $t (@t) {
-	    my $e;
-	    if ($mn ne "") {
-	      $e = "$fn$s$mn";
-	    } else {
-	      $e = "$fn$mn";
-	    }
-	    if ($ln ne "") {
-	      $e .= "$s$ln"
-	    }
-	    $e .= "\@$d.$t";
-	    my $m=md5_hex($e);
-	    if (exists $g{$m}) {
-	      print STDOUT "$e => $m MATCHES!\n";
-	    } else {
-	      print STDERR "$e => $m\n";
-	    }
-	  }
-	}
+        foreach my $d (@d) {
+          foreach my $t (@t) {
+            my $e;
+            if ($mn ne "") {
+              $e = "$fn$s$mn";
+            } else {
+              $e = "$fn";
+            }
+            if ($ln ne "") {
+              $e .= "$s$ln"
+            }
+            $e .= "\@$d.$t";
+            my $m=md5_hex($e);
+            if (exists $g{$m}) {
+              print STDOUT "Hash: $m <= Email: $e MATCHES!\n";
+            } else {
+              print STDERR "Hash: $m <= Email: $e\n";
+            }
+          }
+        }
       }
     }
   }
