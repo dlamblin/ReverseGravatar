@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -48,8 +49,10 @@ class ReverseGravatar {
   }
 
   public static void processFile(Path p) throws IOException {
-    Files.lines(p).flatMap(s -> Arrays.stream(s.toLowerCase().split("\\s+")))
-        .forEach(s -> storeNameOrHash(s));
+    try (Stream<String> lines = Files.lines(p)) {
+      lines.flatMap(s -> Arrays.stream(s.toLowerCase().split("\\s+")))
+          .forEach(s -> storeNameOrHash(s));
+    }
   }
 
   public static void storeNameOrHash(String s) {
@@ -95,12 +98,11 @@ class ReverseGravatar {
     }
   }
 
-  public static void hashAndCheck(ArrayList<String> emails, Function<String, String> md5AndEmail) {
+  public static void hashAndCheck(ArrayList<String> emails, Function<String, String[]> md5AndEmail) {
     emails.parallelStream()
         .map(md5AndEmail)
-        .forEach(s -> {
-          String[] tupple = s.split("≈", 2);
-          String hash = tupple[0], email = tupple[1];
+        .forEach(tuple -> {
+          String hash = tuple[0], email = tuple[1];
           if (hashes.contains(hash)) {
             System.out.printf("Hash: %s <= Email: %s MATCHES!\n", hash, email);
           } else {
@@ -109,27 +111,27 @@ class ReverseGravatar {
         });
   }
 
-  public static Function<String, String> getMd5AndEmailViaDatatypeConverter() {
+  public static Function<String, String[]> getMd5AndEmailViaDatatypeConverter() {
     return s -> {
       try {
-        return DatatypeConverter.printHexBinary(
+        String[] r = {DatatypeConverter.printHexBinary(
             MessageDigest.getInstance("MD5").digest(s.getBytes(StandardCharsets.UTF_8)))
-                   .toLowerCase()
-               + "≈" + s;
+                          .toLowerCase(), s};
+        return r;
       } catch (NoSuchAlgorithmException e) {
         throw new RuntimeException(e);
       }
     };
   }
 
-  public static Function<String, String> getMd5AndEmailViaBigInteger() {
+  public static Function<String, String[]> getMd5AndEmailViaBigInteger() {
     return s -> {
       try {
-        return String.format(
-            "%032x≈%s",
-            new BigInteger(1,
-                           MessageDigest.getInstance("MD5").digest(s.getBytes(StandardCharsets.UTF_8))),
-            s);
+        String h = String.format(
+            "%032x", new BigInteger(1, MessageDigest.getInstance("MD5")
+                .digest(s.getBytes(StandardCharsets.UTF_8))));
+        String[] r = {h, s};
+        return r;
       } catch (NoSuchAlgorithmException e) {
         throw new RuntimeException(e);
       }
