@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@osx219.apple.com" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#Reverse-Gravatar">Reverse Gravatar</a>
+    <ul>
+      <li><a href="#How-to-pass-data-to-this-program">How to pass data to this program</a>
+        <ul>
+          <li><a href="#Separators">Separators</a></li>
+          <li><a href="#Domains">Domains</a></li>
+          <li><a href="#Domain-endings">Domain endings</a></li>
+        </ul>
+      </li>
+      <li><a href="#Example-usage">Example usage</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="Reverse-Gravatar">Reverse Gravatar</h1>
+
+<p>Reverse Gravatar is intended to effectively reverse MD5 hashes to the email address from which the sum was generated. As the MD5 hash algorithm is designed to be irreversible, I accomplish this by the classically simple approach of generating reasonable candidate data to hash and then comparing the resulting hash against all the known valid hashes. Any match indicates that we know the data which was hashed.</p>
+
+<p>The candidate data for Gravatar hashes are email addresses, and for current purposes these are reasonably guessed to be in a limited set of domains, and optionally include a separator of underscore, period, colon, semicolon, or comma. These may not always follow the exact allowed characters of the RFC in question.</p>
+
+<h2 id="How-to-pass-data-to-this-program">How to pass data to this program</h2>
+
+<p>This program reads whitespace separated strings of input from the command line arguments. If any of these are valid file path descriptors, these are opened and read for their content. All the remaining arguments, and the file contents, are then split on whitespace, and either assumed to form name portions of an email address or, only if they are 32 characters of lowercase hexadecimal, to be MD5 hashes. When no arguments are specified the program instead processes standard in as it would a file (as just described).</p>
+
+<p>The program tries all combinations of names, the first character of names, from 1 to 3 parts with every and no separator, followed by @ and every possible domain (from an internal list) with . and every possible domain ending (from an internal list).</p>
+
+<p>These lists are:</p>
+
+<h3 id="Separators">Separators</h3>
+
+<p>_ . : ; ,</p>
+
+<h3 id="Domains">Domains</h3>
+
+<p>gmail hotmail yahoo mailinator aol verizon speakeasy</p>
+
+<h3 id="Domain-endings">Domain endings</h3>
+
+<p>com net org edu co.uk fr</p>
+
+<h2 id="Example-usage">Example usage</h2>
+
+<p>reverse_gravatar.pl daniel pastel lamblin fe101e680f0f36bb6082086bbd65444f reverse_gravatar.pl sampleInput.txt 2&gt;/dev/null</p>
+
+
+</body>
+
+</html>
+
+
