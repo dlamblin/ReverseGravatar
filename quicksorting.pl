@@ -44,11 +44,8 @@ sub Lomuto (@) {
         my $excalls = 0;
         # Exchange (swap) indexed values.
         my $ex = sub ($$) {
-                my ($i, $j) = @_;
+                ($in[$_[0]], $in[$_[1]]) = ($in[$_[1]], $in[$_[0]]);
                 $excalls++;
-                my $k = $in[$i];
-                $in[$i] = $in[$j];
-                $in[$j] = $k;
         };
         # Lomuto Partition
         #   subarray from p to r into p to i - 1, i, and i + 1 to r
@@ -93,11 +90,8 @@ sub Hoare (@) {
         my $qscalls = 0;
         my $excalls = 0;
         my $ex = sub ($$) {
-                my ($i, $j) = @_;
+                ($in[$_[0]], $in[$_[1]]) = ($in[$_[1]], $in[$_[0]]);
                 $excalls++;
-                my $k = $in[$i];
-                $in[$i] = $in[$j];
-                $in[$j] = $k;
         };
         # Hoare Partition
         #   subarray from p to r into p to j, and j + 1 to r
