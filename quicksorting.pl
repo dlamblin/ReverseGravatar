@@ -5,15 +5,22 @@ use warnings;
 use strict;
 
 use List::Util ('shuffle');
-use Data::Dumper::Concise;
 
 use constant INPUT_SIZE => 1500;
 
-my @data = (1 .. INPUT_SIZE);
+my @sequence = (1 .. INPUT_SIZE);
+my @repeats = ((1) x (INPUT_SIZE/2), (2) x (INPUT_SIZE/2));
 my %trials = (
-        Sorted_Data   => [@data],
-        Reverse_Data  => [reverse @data],
-        Shuffled_Data => [shuffle @data],
+        Base0_Empty        => [],
+        Base1_Single       => [1],
+        Base2_Pair         => [2,1],
+        Base3_Triple       => [2,3,1],
+        Sorted_Seq   => [@sequence],
+        Reverse_Seq  => [reverse @sequence],
+        Shuffled_Seq => [shuffle @sequence],
+        Sorted_Rep   => [@repeats],
+        Reverse_Rep  => [reverse @repeats],
+        Shuffled_Rep => [shuffle @repeats],
 );
 
 my %methods = (
