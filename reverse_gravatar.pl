@@ -34,15 +34,15 @@ These lists are:
 
 =head3 Separators
 
-C<_ . : ; ,>
+C<_> C<.> C<:> C<;> C<,>
 
 =head3 Domains
 
-C<gmail hotmail yahoo mailinator aol verizon speakeasy>
+C<gmail> C<hotmail> C<yahoo> C<mailinator> C<aol> C<verizon> C<speakeasy>
 
 =head3 Domain endings
 
-C<com net org edu co.uk fr>
+C<com> C<net> C<org> C<edu> C<co.uk> C<fr>
 
 =head2 Example usage
 

@@ -32,15 +32,15 @@ These lists are:
 
 ### Separators
 
-`_ . : ; ,`
+`_` `.` `:` `;` `,`
 
 ### Domains
 
-`gmail hotmail yahoo mailinator aol verizon speakeasy`
+`gmail` `hotmail` `yahoo` `mailinator` `aol` `verizon` `speakeasy`
 
 ### Domain endings
 
-`com net org edu co.uk fr`
+`com` `net` `org` `edu` `co.uk` `fr`
 
 ## Example usage
 
