@@ -32,17 +32,17 @@ These lists are:
 
 ### Separators
 
-\_ . : ; ,
+`_ . : ; ,`
 
 ### Domains
 
-gmail hotmail yahoo mailinator aol verizon speakeasy
+`gmail hotmail yahoo mailinator aol verizon speakeasy`
 
 ### Domain endings
 
-com net org edu co.uk fr
+`com net org edu co.uk fr`
 
 ## Example usage
 
-reverse\_gravatar.pl daniel pastel lamblin fe101e680f0f36bb6082086bbd65444f
-reverse\_gravatar.pl sampleInput.txt 2>/dev/null
+`reverse_gravatar.pl daniel pastel lamblin fe101e680f0f36bb6082086bbd65444f
+reverse_gravatar.pl sampleInput.txt 2>/dev/null`

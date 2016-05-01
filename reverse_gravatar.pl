@@ -34,20 +34,20 @@ These lists are:
 
 =head3 Separators
 
-_ . : ; ,
+C<_ . : ; ,>
 
 =head3 Domains
 
-gmail hotmail yahoo mailinator aol verizon speakeasy
+C<gmail hotmail yahoo mailinator aol verizon speakeasy>
 
 =head3 Domain endings
 
-com net org edu co.uk fr
+C<com net org edu co.uk fr>
 
 =head2 Example usage
 
-reverse_gravatar.pl daniel pastel lamblin fe101e680f0f36bb6082086bbd65444f
-reverse_gravatar.pl sampleInput.txt 2>/dev/null
+C<reverse_gravatar.pl daniel pastel lamblin fe101e680f0f36bb6082086bbd65444f
+reverse_gravatar.pl sampleInput.txt 2E<gt>/dev/null>
 
 =cut
 
