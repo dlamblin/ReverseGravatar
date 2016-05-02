@@ -85,7 +85,7 @@ foreach (@ARGV) {
   }
 }
 
-sub parseFiles (@) {
+sub parseFiles {
   local @ARGV = @_;
   while(<>) {
     parseArgOrLine($_);

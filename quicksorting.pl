@@ -43,7 +43,7 @@ for my $method (sort keys %methods) {
 }
 
 package quicksorts;
-sub Lomuto (@) {
+sub Lomuto {
         # For the subroutines to modify the input they must be anonymous
         my @in = @_;
         my @q = ($#in, 0);
@@ -91,7 +91,7 @@ sub Lomuto (@) {
 }
 
 # This would have the same comments as the previous sub quicksort except $part
-sub Hoare (@) {
+sub Hoare {
         my @in = @_;
         my @q = ($#in, 0);
         my $qscalls = 0;
